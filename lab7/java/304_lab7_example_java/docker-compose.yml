@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+    app:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        image: cosc304-java
+        depends_on:
+            - cosc304_sqlserver
+            - cosc304_mysql
+        container_name: cosc304-java-example
+        volumes:
+            - ./WebContent:/usr/local/tomcat/webapps/sample/
+        ports:
+            - 80:8080
+    cosc304_sqlserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        container_name: mssql-java-example
+        restart: always
+        environment:
+            ACCEPT_EULA: 'Y'
+            SA_PASSWORD: 'YourStrong@Passw0rd'
+        ports:
+            - '1433:1433'
+        expose:
+            - '1433'
+        volumes:
+            - sqlserver-db:/var/lib/mssql
+    cosc304_mysql:
+        image: mysql:5.7
+        container_name: mysql-java-example
+        restart: always
+        environment:
+            MYSQL_DATABASE: 'workson'
+            MYSQL_USER: 'test'
+            MYSQL_PASSWORD: 'test'            
+            MYSQL_ROOT_PASSWORD: 'rootpw'
+        ports:
+            - '3306:3306'
+        expose:
+            - '3306'
+        volumes:
+            - mysql-db:/var/lib/mysql
+volumes: 
+    sqlserver-db:
+    mysql-db:
