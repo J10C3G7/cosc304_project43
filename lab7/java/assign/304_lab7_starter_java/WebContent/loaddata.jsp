@@ -2,7 +2,7 @@
 <%@ page import="java.util.Scanner" %>
 <%@ page import="java.io.File" %>
 <%@ include file="jdbc.jsp" %>
-
+<!DOCTYPE html>
 <html>
 <head>
 <title>Your Shopping Cart</title>

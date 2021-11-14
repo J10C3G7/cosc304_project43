@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>YOUR NAME Grocery Order List</title>
+<title>The Nostalgic Gamer Order List</title>
 <style>
 	table, tr, th, td {
 	  border: 1px solid black;
