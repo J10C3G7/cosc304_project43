@@ -16,7 +16,7 @@ public class LoadData
 	
 	public static void loadData() throws Exception
 	{		
-		// TODO: Change for your database/user information
+		// Change for your database/user information
 		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_jguigon;";
 		// String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
 		String uid = "jguigon";
