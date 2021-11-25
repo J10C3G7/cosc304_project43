@@ -3,22 +3,36 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ page import="java.util.Locale" %>
 
-<!DOCTYPE html>
+
 <html>
 <head>
-<title>YOUR NAME Grocery</title>
+	<title>The Nostalgic Gamer</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-<h1>Search for the products you want to buy:</h1>
+<%@ include file="header.jsp" %>
+<h1>Browse Products By Category and Search by Product Name:</h1>
 
 <form method="get" action="listprod.jsp">
+	<select size="1" name="categoryName">
+		<option>All</option>
+		<option>Beverages</option>
+		<option>Condiments</option>
+		<option>Confections</option>
+		<option>Dairy Products</option>
+		<option>Grains/Cereals</option>
+		<option>Meat/Poultry</option>
+		<option>Produce</option>
+		<option>Seafood</option>       
+	</select>
 <input type="text" name="productName" size="50">
 <input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all products)
 </form>
 
 <% // Get product name to search for
-String name = request.getParameter("productName");
+String pname = request.getParameter("productName");
+String cname = request.getParameter("categoryName");
+String temp1, temp2;
 Locale.setDefault(new Locale("en","CA"));
 String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
 String uid = "SA";
@@ -37,36 +51,78 @@ catch (java.lang.ClassNotFoundException e)
 
 try ( Connection con = DriverManager.getConnection(url, uid, pw);
       Statement stmt = con.createStatement();) {
-	String sql = "SELECT * FROM product";
+	String sql = "SELECT productId, productName, C.categoryName, productPrice FROM product P JOIN category C ON P.categoryId = C.categoryId";
 	String link = null;
-	Boolean boolean_Name = name != null && !name.equals("");
+	String link2 = null;
+	Boolean boolean_Pname = pname != null && !pname.equals("");
+	Boolean boolean_Cname = cname != null && !cname.equals("All");
 	PreparedStatement pstmt=null;
 	ResultSet rst = null;
 	
-	if(!boolean_Name){
-		out.println("<h2>All Products</h2>");
-		out.println("<table><tr><th></th><th>Product Name</th><th>Price</th></tr>");
-		pstmt = con.prepareStatement(sql);
-		rst = pstmt.executeQuery();
-		while (rst.next()){
-			link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(3);
-			out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td>"+rst.getString(2)+"</td><td>"+currFormat.format(rst.getDouble(3))+"</td></tr>");
+	if(!boolean_Pname){
+		if(!boolean_Cname){
+			out.println("<h2>All Products</h2>");
+			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			pstmt = con.prepareStatement(sql);
+			rst = pstmt.executeQuery();
+			while (rst.next()){
+				link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(4);
+				link2 = "product.jsp?id="+rst.getInt(1);
+				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
+		
+			}
+			out.println("</table></font>");
 		}
-		out.println("</table>");
+		else{
+			out.println("<h2>Products in category: '"+cname+"'</h2>");
+			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			temp1 = "%"+cname+"%";
+			sql += " WHERE categoryName LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, temp1);
+			rst = pstmt.executeQuery();
+			while (rst.next()){
+				link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(4);
+				link2 = "product.jsp?id="+rst.getInt(1);
+				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
+			}
+			out.println("</table></font>");
+		}
+
 	}
 	else{
-		out.println("<h2>Products containing '"+name+"'</h2>");
-		out.println("<table><tr><th></th><th>Product Name</th><th>Price</th></tr>");
-		name = "%"+name+"%";
-		sql += " WHERE productName LIKE ?";
-		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, name);
-		rst = pstmt.executeQuery();
-		while (rst.next()){
-			link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(3);
-			out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td>"+rst.getString(2)+"</td><td>"+currFormat.format(rst.getDouble(3))+"</td></tr>");
+		if(!boolean_Cname){
+			out.println("<h2>Products containing '"+pname+"'</h2>");
+			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			temp1 = "%"+pname+"%";
+			sql += " WHERE productName LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, temp1);
+			rst = pstmt.executeQuery();
+			while (rst.next()){
+				link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(4);
+				link2 = "product.jsp?id="+rst.getInt(1);
+				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
+			}
+			out.println("</table></font>");
 		}
-		out.println("</table>");
+		else{
+			out.println("<h2>Products containing '"+pname+"' in category: '"+cname+"'</h2>");
+			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			temp1 = "%"+pname+"%";
+			temp2 = "%"+cname+"%";
+			sql += " WHERE productName LIKE ? AND categoryName LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, temp1);
+			pstmt.setString(2, temp2);
+			rst = pstmt.executeQuery();
+			while (rst.next()){
+				link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(4);
+				link2 = "product.jsp?id="+rst.getInt(1);
+				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
+			}
+			out.println("</table></font>");
+		}
 	}	
 }
 catch (SQLException ex) {
