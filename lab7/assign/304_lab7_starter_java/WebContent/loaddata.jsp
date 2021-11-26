@@ -14,7 +14,7 @@ String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
 String uid = "SA";
 String pw = "YourStrong@Passw0rd";
 
-out.print("<h1>Connecting to database.</h1><br><br>");
+out.print("<h1>Connecting to database.</h1><br>");
 
 Connection con = DriverManager.getConnection(url, uid, pw);
         
