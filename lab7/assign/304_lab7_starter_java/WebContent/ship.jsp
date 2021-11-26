@@ -18,7 +18,7 @@
 
 	<%
 		// TODO: Get order id
-		String orderId = request.getParameter("id");
+		String orderId = request.getParameter("orderId");
 
 		Locale.setDefault(new Locale("en","CA"));
 		String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
@@ -93,8 +93,8 @@
 						pstmt_updateInventory.setInt(3, 1);  // warehouseId
 						pstmt_updateInventory.executeUpdate();
 
-						out.println("Ordered Product: " + rst_selectProducts.getInt("productId") + "\tQty: " + rst_selectProducts.getInt("quantity") + 
-								"\tPrevious inventory: " + rst_selectProducts.getInt("prevInv") + "\tNew inventory: " + rst_selectProducts.getInt("newInv") + "\n");
+						out.println("<h2>Ordered Product: " + rst_selectProducts.getInt("productId") + "\tQty: " + rst_selectProducts.getInt("quantity") + 
+								"\tPrevious inventory: " + rst_selectProducts.getInt("prevInv") + "\tNew inventory: " + rst_selectProducts.getInt("newInv") + "</h2>");
 					
 					} else {  // if there is insufficient inventory
 						allSufficientInventory = false;
@@ -103,11 +103,11 @@
 					}
 				}
 				if(allSufficientInventory) {
-					out.println("Shipment successfully processed.");
+					out.println("<h1>Shipment successfully processed.</h1>");
 					con.commit();
 
 				} else {
-					out.println("Shipment not done.  Insufficient inventory for product id: " + insufficientProductId);
+					out.println("<h1>Shipment not done.  Insufficient inventory for product id: " + insufficientProductId + "</h1>");
 					con.rollback();
 				}
 
