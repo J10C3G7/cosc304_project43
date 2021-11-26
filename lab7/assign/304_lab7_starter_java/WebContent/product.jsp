@@ -35,7 +35,7 @@ catch (java.lang.ClassNotFoundException e)
 
 try ( Connection con = DriverManager.getConnection(url, uid, pw);
       Statement stmt = con.createStatement();) {
-    String sql = "SELECT productName, productImageURL, productId, productPrice FROM product WHERE productId = "+productId;
+    String sql = "SELECT productName, productImageURL, productId, productPrice, productImage FROM product WHERE productId = "+productId;
     String link;
     PreparedStatement pstmt= con.prepareStatement(sql);
     ResultSet rst = pstmt.executeQuery();
@@ -45,8 +45,10 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
     if(rst.getString(2)!=null)
         out.print("<img src=\""+rst.getString(2)+"\">");
     // TODO: Retrieve any image stored directly in database. Note: Call displayImage.jsp with product id as parameter.
+    if(rst.getBytes(5) != null){
         link = "displayImage.jsp?id="+rst.getInt(3);
-        out.println("<img src=\""+link+"\">");        
+        out.println("<img src=\""+link+"\">");
+    }
     out.println("<table><tbody><tr><th>Id</th><td>"+rst.getInt(3)+"</td></tr><tr><th>Price</th><td>"+currFormat.format(rst.getDouble(4))+"</td></tr></tbody></table>");
     // TODO: Add links to Add to Cart and Continue Shopping
     link = "addcart.jsp?id="+rst.getInt(3)+"&name="+rst.getString(1)+"&price="+rst.getDouble(4);
