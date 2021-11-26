@@ -17,11 +17,13 @@ public class LoadData
 	public static void loadData() throws Exception
 	{		
 		// Change for your database/user information
-		String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_jguigon;";
-		// String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
-		String uid = "jguigon";
-		String pw = "52744570";
-		
+		// String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_jguigon;";
+		// String uid = "jguigon";
+		// String pw = "52744570";
+		String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
+		String uid = "SA";
+		String pw = "YourStrong@Passw0rd";
+
 		System.out.println("Connecting to database.");
 
 		Connection con = DriverManager.getConnection(url, uid, pw);

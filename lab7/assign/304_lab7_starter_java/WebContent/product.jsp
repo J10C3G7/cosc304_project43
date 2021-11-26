@@ -6,7 +6,7 @@
 
 <html>
 <head>
-<title>Ray's Grocery - Product Information</title>
+<title>The Nostalgic Gamer - Product Information</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -35,7 +35,7 @@ catch (java.lang.ClassNotFoundException e)
 
 try ( Connection con = DriverManager.getConnection(url, uid, pw);
       Statement stmt = con.createStatement();) {
-    String sql = "SELECT productName, productImageURL, productImage, productId, productPrice FROM product WHERE productId = "+productId;
+    String sql = "SELECT productName, productImageURL, productId, productPrice FROM product WHERE productId = "+productId;
     String link;
     PreparedStatement pstmt= con.prepareStatement(sql);
     ResultSet rst = pstmt.executeQuery();
@@ -43,15 +43,13 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
     out.println("<h2>"+rst.getString(1)+"</h2>");
     // TODO: If there is a productImageURL, display using IMG tag
     if(rst.getString(2)!=null)
-        out.println("<img src=\""+rst.getString(2)+"\">");
+        out.print("<img src=\""+rst.getString(2)+"\">");
     // TODO: Retrieve any image stored directly in database. Note: Call displayImage.jsp with product id as parameter.
-    if(rst.getBytes(3) != null){
-        link = "displayImage.jsp?id="+rst.getInt(4);
+        link = "displayImage.jsp?id="+rst.getInt(3);
         out.println("<img src=\""+link+"\">");        
-    }
-    out.println("<table><tbody><tr><th>Id</th><td>"+rst.getInt(4)+"</td></tr><tr><th>Price</th><td>"+currFormat.format(rst.getDouble(5))+"</td></tr></tbody></table>");
+    out.println("<table><tbody><tr><th>Id</th><td>"+rst.getInt(3)+"</td></tr><tr><th>Price</th><td>"+currFormat.format(rst.getDouble(4))+"</td></tr></tbody></table>");
     // TODO: Add links to Add to Cart and Continue Shopping
-    link = "addcart.jsp?id="+rst.getInt(4)+"&name="+rst.getString(1)+"&price="+rst.getDouble(5);
+    link = "addcart.jsp?id="+rst.getInt(3)+"&name="+rst.getString(1)+"&price="+rst.getDouble(4);
     out.println("<h3><a href=\""+link+"\">Add to Cart</a></h3>");
 }catch (SQLException ex) {
     out.println(ex); 

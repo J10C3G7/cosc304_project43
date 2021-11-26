@@ -8,12 +8,15 @@
 <title>Your Shopping Cart</title>
 </head>
 <body>
-
+<%@ include file="header.jsp" %>
 <%
 String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
 String uid = "SA";
 String pw = "YourStrong@Passw0rd";
 
+//String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_jguigon;";
+//String uid = "jguigon";
+//String pw = "52744570";
 out.print("<h1>Connecting to database.</h1><br>");
 
 Connection con = DriverManager.getConnection(url, uid, pw);
