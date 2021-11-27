@@ -12,7 +12,7 @@
 	{	System.err.println(e); }
 
 	if(authenticatedUser != null)
-		response.sendRedirect("index.jsp");		// Successful login
+		response.sendRedirect("shop.html");		// Successful login
 	else
 		response.sendRedirect("login.jsp");		// Failed login - redirect back to login page with a message 
 %>
@@ -25,25 +25,44 @@
 		String password = request.getParameter("password");
 		String retStr = null;
 
-		if(username == null || password == null)
-				return null;
-		if((username.length() == 0) || (password.length() == 0))
-				return null;
+		if(username == null || password == null) 
+			{ return null; }
+		if((username.length() == 0) || (password.length() == 0)) 
+			{ return null; }
 
-		try 
+		String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
+		String uid = "SA";
+		String pw = "YourStrong@Passw0rd";
+	
+		//Note: Forces loading of SQL Server driver
+		try {	
+			// Load driver class
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		} catch (java.lang.ClassNotFoundException e) {
+			out.println("ClassNotFoundException: " +e);
+		}
+	
+		try ( Connection con = DriverManager.getConnection(url, uid, pw);
+				Statement stmt = con.createStatement();) 
 		{
-			getConnection();
-			
 			// TODO: Check if userId and password match some customer account. If so, set retStr to be the username.
-			retStr = "";			
+			String sql = "SELECT userId FROM customer WHERE userId = ? AND password = ?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			ResultSet rst = pstmt.executeQuery();
+
+			if(rst.next() != false) {
+				// username and password match existing account
+				retStr = username;
+			} else {
+				// no such account exists
+				retStr = null;
+			}
 		} 
 		catch (SQLException ex) {
 			out.println(ex);
 		}
-		finally
-		{
-			closeConnection();
-		}	
 		
 		if(retStr != null)
 		{	session.removeAttribute("loginMessage");
