@@ -6,6 +6,11 @@
 <html>
 <head>
 	<title>The Nostalgic Gamer - Customer Page</title>
+	<style>
+		table, tr, th, td {
+		  border: 1px solid black;
+		}
+	</style>
 </head>
 <body>
 
@@ -61,7 +66,7 @@
 	}
 %>
 
-<h2><a href="shop.html">Back to Main Page</a></h2>
+<h2><a href="index.jsp">Back to Main Page</a></h2>
 </body>
 </html>
 
