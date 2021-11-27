@@ -16,7 +16,7 @@
 <title>The Nostalgic Gamer Order Processing</title>
 </head>
 <body>
-
+	<%@ include file="header.jsp" %>
 <% 
 // Get customer id
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
@@ -113,7 +113,7 @@ try(Connection con = DriverManager.getConnection(url, uid, pw);
 			out.println("<h1>Order completed.  Will be shipped soon...</h1>");
 			out.println("<h1>Your order reference number is : "+orderId+"</h1>");
 			out.println("<h1>Shipping to customer: "+custId+" Name: "+custName+"</h1>");
-			out.println("<h2><a href=\"shop.html\">Return to shopping</a></h2>");
+			out.println("<h2><a href=\"index.jsp\">Return to shopping</a></h2>");
 			// Clear cart if order placed successfully
 			session.removeAttribute("productList");
 		}

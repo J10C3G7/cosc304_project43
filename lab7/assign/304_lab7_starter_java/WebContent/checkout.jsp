@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Ray's Grocery CheckOut Line</title>
+<title>The Nostalgic Gamer CheckOut Line</title>
 </head>
 <body>
-
+    <%@ include file="header.jsp" %>
 <h1>Enter your customer id to complete the transaction:</h1>
 
 <form method="get" action="order.jsp">
