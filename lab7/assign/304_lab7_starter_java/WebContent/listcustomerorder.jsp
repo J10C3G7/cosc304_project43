@@ -15,6 +15,7 @@
 <h1>Order List</h1>
 
 <%
+String custId = request.getParameter("id");
 Locale.setDefault(new Locale("en","CA"));
 String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
 String uid = "SA";
@@ -39,7 +40,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 
 	// Write query to retrieve all order summary records
 	// For each order in the ResultSet
-	ResultSet rst = stmt.executeQuery("SELECT A.orderId, orderDate, C.customerId, firstName, lastName, totalAmount FROM ordersummary A LEFT Join customer C ON A.customerId = C.customerId");
+	ResultSet rst = stmt.executeQuery("SELECT A.orderId, orderDate, C.customerId, firstName, lastName, totalAmount FROM ordersummary A LEFT Join customer C ON A.customerId = C.customerId WHERE C.customerId = " + 1);
 	
 	// Write a query to retrieve the products in the order
 	//   - Use a PreparedStatement as will repeat this query many times
@@ -67,7 +68,7 @@ catch (SQLException ex) {
 }
 // Close connection
 %>
-</div>
+
 </body>
 </html>
 

@@ -56,8 +56,19 @@
 				// username and password match existing account
 				retStr = username;
 			} else {
-				// no such account exists
-				retStr = null;
+				sql = "SELECT userId FROM admin WHERE userId = ? AND password = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, username);
+				pstmt.setString(2, password);
+				rst = pstmt.executeQuery();
+
+				if(rst.next() != false) {
+					// username and password match existing account
+					retStr = username;
+				} else {
+					// no such account exists
+					retStr = null;
+				}
 			}
 		} 
 		catch (SQLException ex) {

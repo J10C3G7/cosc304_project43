@@ -9,9 +9,9 @@
 <title>The Nostalgic Gamer - Product Information</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-
-<%@ include file="header.jsp" %>
+<body class="col-md-12" align="center">
+	<%@ include file="header.jsp" %>
+<div style="margin:0 auto;text-align:center;display:inline">
 
 <%
 // Get product name to search for
@@ -35,7 +35,7 @@ catch (java.lang.ClassNotFoundException e)
 
 try ( Connection con = DriverManager.getConnection(url, uid, pw);
       Statement stmt = con.createStatement();) {
-    String sql = "SELECT productName, productImageURL, productId, productPrice, productImage FROM product WHERE productId = "+productId;
+    String sql = "SELECT productName, productImageURL, productId, productPrice, productImage, productDesc FROM product WHERE productId = "+productId;
     String link;
     PreparedStatement pstmt= con.prepareStatement(sql);
     ResultSet rst = pstmt.executeQuery();
@@ -49,18 +49,19 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
         link = "displayImage.jsp?id="+rst.getInt(3);
         out.println("<img src=\""+link+"\">");
     }
-    out.println("<table><tbody><tr><th>Id</th><td>"+rst.getInt(3)+"</td></tr><tr><th>Price</th><td>"+currFormat.format(rst.getDouble(4))+"</td></tr></tbody></table>");
+    out.println("<table class=\"table\" align=\"center\"><tbody><tr><td>Id:"+rst.getInt(3)+"</td></tr><tr><td>Price:"+currFormat.format(rst.getDouble(4))+"</td></tr><tr><td>Description:"+rst.getString(6)+"</td></tr></tbody></table>");
     // TODO: Add links to Add to Cart and Continue Shopping
     link = "addcart.jsp?id="+rst.getInt(3)+"&name="+rst.getString(1)+"&price="+rst.getDouble(4);
-    out.println("<h3><a href=\""+link+"\">Add to Cart</a></h3>");
+    out.println("<h4><a href=\""+link+"\">Add to Cart</a></h4>");
 }catch (SQLException ex) {
     out.println(ex); 
 }
 %>
 
-<h3>
+<h4>
     <a href="listprod.jsp">Continue Shopping</a>
-</h3>
+</h4>
+</div>
 </body>
 </html>
 
