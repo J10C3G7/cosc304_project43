@@ -6,11 +6,7 @@
 <html>
 <head>
 	<title>The Nostalgic Gamer - Customer Page</title>
-	<style>
-		table, tr, th, td {
-		  border: 1px solid black;
-		}
-	</style>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 

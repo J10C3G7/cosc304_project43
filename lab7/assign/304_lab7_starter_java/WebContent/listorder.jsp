@@ -6,7 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>The Nostalgic Gamer Order List</title>
+	<title>The Nostalgic Gamer Order List</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 <style>
 	table, tr, th, td {
 	  border: 1px solid black;

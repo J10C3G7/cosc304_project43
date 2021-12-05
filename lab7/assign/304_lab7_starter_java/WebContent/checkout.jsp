@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>The Nostalgic Gamer CheckOut Line</title>
+    <title>The Nostalgic Gamer CheckOut Line</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <%@ include file="header.jsp" %>

@@ -2,9 +2,10 @@
 <html>
 <head>
         <title>The Nostalgic Gamer Main Page</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1 align="center"><font face="cursive" color="#3399FF">Welcome to The Nostalgic Gamer</font></h1><hr>
+<%@ include file="header.jsp" %>
 
 <h2 align="center"><a href="login.jsp">Login</a></h2>
 
