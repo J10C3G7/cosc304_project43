@@ -1,6 +1,5 @@
 <%@ page import="java.util.Locale" %>
 <%@ include file="jdbc.jsp" %>
-<%@ include file="auth.jsp"%>
 
 <!DOCTYPE html>
 <html>

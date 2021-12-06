@@ -17,6 +17,7 @@
     <br>
     <form method="get" action="addproduct.jsp">
         <table style="display:inline">
+            <tbody>
         <tr>
             <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Product Name:</font></div></td>
             <td><input type="text" name="productName" size="40" maxlength="40"></td>
@@ -31,14 +32,18 @@
         </tr>
         <tr>
             <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Product Image URL:</font></div></td>
-            <td><input type="text" name="productImageURL" size="100" maxlength="40"></td>
+            <td><input type="text" name="productImageURL" size="50" maxlength="100"></td>
         </tr>
         <tr>
             <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Product Description:</font></div></td>
-            <td><input type="text" name="productDesc" size="1000" maxlength="40"></td>
+            <td><input type="text" name="productDesc" size="50" maxlength="1000"></td>
         </tr>
+        <tr>
+            <td></td><td align="center"><input type="submit" value="Submit"><input type="reset" value="Reset"></td>
+        </tr>
+        </tbody>
         </table>
-        <input type="submit" value="Submit"><input type="reset" value="Reset">
+
         </form>
     </br>
 
