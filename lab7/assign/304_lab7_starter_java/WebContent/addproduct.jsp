@@ -1,14 +1,13 @@
 <%@ page import="java.sql.*,java.net.URLEncoder" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
+<%@ include file="authadmin.jsp"%>
 
 <html>
 <head>
 	<title>The Nostalgic Gamer</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-
-
 <body>
 <%@ include file="header.jsp" %>
 <div style="margin:0 auto;text-align:center;display:inline">

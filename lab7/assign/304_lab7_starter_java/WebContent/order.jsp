@@ -9,6 +9,7 @@
 <%@ page import="java.util.Locale" %>
 <%@	page import="java.text.SimpleDateFormat" %> 
 <%@	page import="java.util.Date" %>
+<%@ include file="logoutadmin.jsp"%>
 
 <!DOCTYPE html>
 <html>

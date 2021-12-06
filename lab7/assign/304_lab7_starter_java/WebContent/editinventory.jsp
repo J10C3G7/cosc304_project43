@@ -1,6 +1,7 @@
 <%@ page import="java.sql.*,java.net.URLEncoder" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
+<%@ include file="authadmin.jsp"%>
 
 <html>
 <head>
@@ -13,7 +14,7 @@
 <%@ include file="header.jsp" %>
 <div style="margin:0 auto;text-align:center;display:inline">
 
-	<h1>Add a Product:</h1>
+	<h1>Add Inventory, All Fields Must Be Filled:</h1>
     <br>
     <form method="get" action="editinventory.jsp">
         <table style="display:inline">
@@ -70,39 +71,57 @@
         if(bool_prodId){
             if(bool_wareId){
                 if(bool_quantity){
-                    String sql_prod = "SELECT productId FROM productinventory WHERE productId = " + prodId + " AND warehouseId= " + wareId;
+                    String sql_prod = "SELECT productId FROM product WHERE productId = " + prodId;
                     pstmt = con.prepareStatement(sql_prod);
                     rst = pstmt.executeQuery();
-            
-                    if(rst.next() == false){
-                        String sql = "SELECT productPrice FROM product WHERE productId = " + prodId;
-                        pstmt = con.prepareStatement(sql);
-                        rst = pstmt.executeQuery();
-                        rst.next();
-                        String val1 = ""+prodId;
-                        String val2 = "" + wareId;
-                        String val3 = "" + quantity;
-                        String val4 = "" + rst.getDouble(1);
-                        //out.println("<h2>"+val+"</h2>");
 
-                        pstmt = con.prepareStatement(sql_in);
-                        pstmt.setString(1, val1);
-                        pstmt.setString(2, val2);
-                        pstmt.setString(3, val3);
-                        pstmt.setString(4, val4);
-                        pstmt.executeUpdate();
-                    }else{
-                        String sql = "SELECT productPrice FROM product WHERE productId = " + prodId;
-                        pstmt = con.prepareStatement(sql);
+                    if(rst.next()  == true){
+                        sql_prod = "SELECT warehouseId FROM warehouse WHERE warehouseId = " + wareId;
+                        pstmt = con.prepareStatement(sql_prod);
                         rst = pstmt.executeQuery();
-                        rst.next();
-                        String val1 = ""+ rst.getDouble(1);
-                        //out.println("<h2>Product Has Been Added</h2>");
-                        pstmt = con.prepareStatement(sql_up);
-                        pstmt.setString(1, val1);
-                        pstmt.executeUpdate();
+
+                        if(rst.next() == true){
+                            sql_prod = "SELECT productId FROM productinventory WHERE productId = " + prodId + " AND warehouseId= " + wareId;
+                            pstmt = con.prepareStatement(sql_prod);
+                            rst = pstmt.executeQuery();
+                    
+                            if(rst.next() == false){
+                                sql_prod = "SELECT productPrice FROM product WHERE productId = " + prodId;
+                                pstmt = con.prepareStatement(sql_prod);
+                                rst = pstmt.executeQuery();
+                                rst.next();
+                                String val1 = ""+prodId;
+                                String val2 = "" + wareId;
+                                String val3 = "" + quantity;
+                                String val4 = "" + rst.getDouble(1);
+                                //out.println("<h2>"+val+"</h2>");
+
+                                pstmt = con.prepareStatement(sql_in);
+                                pstmt.setString(1, val1);
+                                pstmt.setString(2, val2);
+                                pstmt.setString(3, val3);
+                                pstmt.setString(4, val4);
+                                pstmt.executeUpdate();
+                                out.println("<h2>Inventory Change Has Been Made</h2>");
+                            }else{
+                                sql_prod = "SELECT productPrice FROM product WHERE productId = " + prodId;
+                                pstmt = con.prepareStatement(sql_prod);
+                                rst = pstmt.executeQuery();
+                                rst.next();
+                                String val1 = ""+ rst.getDouble(1);
+                                //out.println("<h2>Product Has Been Added</h2>");
+                                pstmt = con.prepareStatement(sql_up);
+                                pstmt.setString(1, val1);
+                                pstmt.executeUpdate();
+                                out.println("<h2>Inventory Change Has Been Made</h2>");
+                            }
+                        }else{
+                            out.println("<h2>Invalid Warehouse Id</h2>");
+                        }
+                    }else{
+                        out.println("<h2>Invalid Product Id</h2>");
                     }
-                    out.println("<h2>Inventory Change Has Been Made</h2>");	
+                    	
                 }else{
                     out.println("<h2>Enter Product Id, Warehouse Id, Quantity</h2>");
                 }

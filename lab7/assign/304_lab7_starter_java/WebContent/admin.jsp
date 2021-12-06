@@ -1,5 +1,5 @@
 <%@ include file="jdbc.jsp" %>
-<%@ include file="auth.jsp"%>
+<%@ include file="authadmin.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +22,13 @@
         <h2 align="center"><a href="listinventory.jsp">List Inventory</a></h2>
 
         <h2 align="center"><a href="editinventory.jsp">Edit Inventory</a></h2>
+
+        <h2 align="center"><a href="loaddata.jsp">Load/Restore Database</a></h2>
+
+        <h2 align="center"><a href="index.jsp">Log Out</a></h2>
 <%
 
-// TODO: Write SQL query that prints out total order amount by day
+// TODO: Writ SQL query that prints out total order amount by day
 String sql = "";
 
 %>

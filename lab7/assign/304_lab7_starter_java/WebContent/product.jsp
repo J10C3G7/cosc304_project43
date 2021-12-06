@@ -3,6 +3,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="jdbc.jsp" %>
 <%@ page import="java.util.Locale" %>
+<%@ include file="logoutadmin.jsp"%>
 
 <html>
 <head>
@@ -22,6 +23,7 @@ String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
 String uid = "SA";
 String pw = "YourStrong@Passw0rd";
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
+String link;
 
 //Note: Forces loading of SQL Server driver
 try
@@ -36,7 +38,7 @@ catch (java.lang.ClassNotFoundException e)
 try ( Connection con = DriverManager.getConnection(url, uid, pw);
       Statement stmt = con.createStatement();) {
     String sql = "SELECT productName, productImageURL, productId, productPrice, productImage, productDesc FROM product WHERE productId = "+productId;
-    String link;
+    
     PreparedStatement pstmt= con.prepareStatement(sql);
     ResultSet rst = pstmt.executeQuery();
     rst.next();
@@ -71,6 +73,25 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 <h4>
     <a href="listprod.jsp">Continue Shopping</a>
 </h4>
+<%
+    out.println("<h4><a href=\"addreview.jsp?id="+productId+"\">Add a Review</a></h4>");
+try ( Connection con = DriverManager.getConnection(url, uid, pw);
+      Statement stmt = con.createStatement();) {
+    String sql = "SELECT C.customerId, firstName, lastName, reviewRating, reviewComment FROM review R JOIN customer C ON R.customerId = C.customerId WHERE productId = "+productId;
+    PreparedStatement pstmt= con.prepareStatement(sql);
+    ResultSet rst = pstmt.executeQuery();
+    out.println("<table class=\"table\" align=\"center\" style=\"display:inline\"><tbody><tr><th>Cust ID</th><th>Customer Name</th><th>Review Rating</th><th>Review</th></tr>");
+    while(rst.next()){
+        out.println("<tr><td>"+rst.getInt(1)+"</td>"+
+        "<td>"+rst.getString(2)+" "+rst.getString(3)+"</td><td>"+rst.getInt(4)+"</td><td>"+rst.getString(5)+"</td>");
+    }
+    out.println("</tbody></table>");
+}catch (SQLException ex) {
+    out.println(ex); 
+}
+%>
+
+
 </div>
 </body>
 </html>

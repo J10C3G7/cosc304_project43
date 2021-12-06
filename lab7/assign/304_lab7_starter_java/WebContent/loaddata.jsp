@@ -2,12 +2,14 @@
 <%@ page import="java.util.Scanner" %>
 <%@ page import="java.io.File" %>
 <%@ include file="jdbc.jsp" %>
+<%@ include file="authadmin.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Your Shopping Cart</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<bodyclass="col-md-12" align="center">
 <%@ include file="header.jsp" %>
 <%
 String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";

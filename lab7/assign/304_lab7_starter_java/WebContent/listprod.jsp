@@ -2,6 +2,7 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ page import="java.util.Locale" %>
+<%@ include file="logoutadmin.jsp"%>
 
 
 <html>
@@ -17,7 +18,7 @@
 
 	<h1>Browse Products By Category and Search by Product Name:</h1>
 
-	<form method="get" action="listprod.jsp">
+	<form method="get" action="listprod.jsp?">
 		<select size="1" name="categoryName">
 			<option>All</option>
 			<option>Beverages</option>
@@ -79,7 +80,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 		}
 		else{
 			out.println("<h2>Products in category: '"+cname+"'</h2>");
-			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
 			temp1 = "%"+cname+"%";
 			sql += " WHERE categoryName LIKE ?";
 			pstmt = con.prepareStatement(sql);
@@ -97,7 +98,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	else{
 		if(!boolean_Cname){
 			out.println("<h2>Products containing '"+pname+"'</h2>");
-			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
 			temp1 = "%"+pname+"%";
 			sql += " WHERE productName LIKE ?";
 			pstmt = con.prepareStatement(sql);
@@ -112,7 +113,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 		}
 		else{
 			out.println("<h2>Products containing '"+pname+"' in category: '"+cname+"'</h2>");
-			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
 			temp1 = "%"+pname+"%";
 			temp2 = "%"+cname+"%";
 			sql += " WHERE productName LIKE ? AND categoryName LIKE ?";

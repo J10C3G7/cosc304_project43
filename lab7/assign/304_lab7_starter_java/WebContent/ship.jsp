@@ -7,6 +7,7 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Locale" %>
 <%@ include file="jdbc.jsp" %>
+<%@ include file="logoutadmin.jsp"%>
 
 <html>
 	<head>

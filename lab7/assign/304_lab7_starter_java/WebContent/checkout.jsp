@@ -1,21 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>The Nostalgic Gamer CheckOut Line</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="col-md-12" align="center">
-	<%@ include file="header.jsp" %>
-<div style="margin:0 auto;text-align:center;display:inline">
+<%@ page import="java.sql.*,java.net.URLEncoder" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
+<%@ include file="logoutadmin.jsp"%>
+<%@ include file="auth.jsp"%>
 
-<h1>Enter your customer id to complete the transaction:</h1>
+<% 
+String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
+String uid = "SA";
+String pw = "YourStrong@Passw0rd";
+String userName = (String) session.getAttribute("authenticatedUser");
 
-<form method="get" action="order.jsp">
-<input type="text" name="customerId" size="50">
-<input type="submit" value="Submit"><input type="reset" value="Reset">
-</form>
+//Note: Forces loading of SQL Server driver
+try
+{	// Load driver class
+    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+}
+catch (java.lang.ClassNotFoundException e)
+{
+    out.println("ClassNotFoundException: " +e);
+}
 
-</div>
-</body>
-</html>
+try ( Connection con = DriverManager.getConnection(url, uid, pw);
+      Statement stmt = con.createStatement();) {
+    String sql_selectCustomer = "SELECT customerId FROM customer WHERE userID = ?";
+    PreparedStatement pstmt = con.prepareStatement(sql_selectCustomer);
+    pstmt.setString(1, userName);
+    ResultSet rst = pstmt.executeQuery();
+    rst.next();
+    int custId = rst.getInt(1);
+    response.sendRedirect("order.jsp?customerId=" + custId);
+}    catch (SQLException ex) {
+    out.println(ex); 
+}
+%>
 

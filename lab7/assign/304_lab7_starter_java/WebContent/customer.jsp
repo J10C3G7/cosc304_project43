@@ -1,5 +1,7 @@
 <%@ page import="java.util.Locale" %>
 <%@ include file="jdbc.jsp" %>
+<%@ include file="logoutadmin.jsp"%>
+<%@ include file="auth.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -37,17 +39,9 @@
 		pstmt.setString(1, userName);
     	ResultSet rst = pstmt.executeQuery();
 		
-		if(rst.next() == false) {
-			sql_selectCustomer = "SELECT * FROM admin WHERE userid = ?";
-			pstmt = con.prepareStatement(sql_selectCustomer);
-			pstmt.setString(1, userName);
-			rst = pstmt.executeQuery();
-			if(rst.next() == false){
-				out.println("<h3>Error: Invalid Username</h3>");
-			}else{
-				response.sendRedirect("admin.jsp");
-			}
-			
+
+		if(rst.next() == false){
+			out.println("<h3>Error: Invalid Username</h3>");
 		} else {
 			out.println("<table style=\"display:inline\"><tbody>"+
 				"<tr><th>Id</th><td>"+rst.getInt("customerId")+"</td></tr>"+

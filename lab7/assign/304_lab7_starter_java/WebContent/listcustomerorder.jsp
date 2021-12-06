@@ -2,6 +2,7 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ page import="java.util.Locale" %>
+<%@ include file="logoutadmin.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -40,7 +41,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 
 	// Write query to retrieve all order summary records
 	// For each order in the ResultSet
-	ResultSet rst = stmt.executeQuery("SELECT A.orderId, orderDate, C.customerId, firstName, lastName, totalAmount FROM ordersummary A LEFT Join customer C ON A.customerId = C.customerId WHERE C.customerId = " + 1);
+	ResultSet rst = stmt.executeQuery("SELECT A.orderId, orderDate, C.customerId, firstName, lastName, totalAmount FROM ordersummary A LEFT Join customer C ON A.customerId = C.customerId WHERE C.customerId = " + custId);
 	
 	// Write a query to retrieve the products in the order
 	//   - Use a PreparedStatement as will repeat this query many times
