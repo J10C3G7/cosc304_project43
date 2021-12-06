@@ -41,15 +41,25 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
     ResultSet rst = pstmt.executeQuery();
     rst.next();
     out.println("<h2>"+rst.getString(1)+"</h2>");
+    out.println("<table class=\"table\" align=\"center\" style=\"display:inline\"><tbody>");
     // TODO: If there is a productImageURL, display using IMG tag
     if(rst.getString(2)!=null)
-        out.print("<img src=\""+rst.getString(2)+"\">");
+        out.print("<tr><td><img src=\""+rst.getString(2)+"\"></td></tr>");
     // TODO: Retrieve any image stored directly in database. Note: Call displayImage.jsp with product id as parameter.
     if(rst.getBytes(5) != null){
         link = "displayImage.jsp?id="+rst.getInt(3);
-        out.println("<img src=\""+link+"\">");
+        out.println("<tr><td><img src=\""+link+"\"></td></tr>");
     }
-    out.println("<table class=\"table\" align=\"center\"><tbody><tr><td>Id:"+rst.getInt(3)+"</td></tr><tr><td>Price:"+currFormat.format(rst.getDouble(4))+"</td></tr><tr><td>Description:"+rst.getString(6)+"</td></tr></tbody></table>");
+    out.println("<tr><th>Id:</th><td>"+rst.getInt(3)+"</td></tr><tr><th>Price:</th><td>"+currFormat.format(rst.getDouble(4))+"</td></tr><tr><th>Description:</th><td>"+rst.getString(6)+"</td></tr><tr><th>Inventory:</th>");
+    
+    out.println("<td colspan=5><table class=\"table table-hover\" border=\"1\"><tbody><tr><th>Warehouse Id</th><th>Quantity</th></tr>");
+    sql = "SELECT warehouseid, quantity FROM productinventory WHERE productId = "+productId;
+    pstmt = con.prepareStatement(sql);
+    ResultSet rst_2 = pstmt.executeQuery();
+    while(rst_2.next())
+        out.println("<tr><td>"+rst_2.getInt(1)+"</td>"+"<td>"+rst_2.getInt(2)+"</td></tr>");
+    out.println("</tbody></table></td></tr>");
+    out.println("</tbody></table>");
     // TODO: Add links to Add to Cart and Continue Shopping
     link = "addcart.jsp?id="+rst.getInt(3)+"&name="+rst.getString(1)+"&price="+rst.getDouble(4);
     out.println("<h4><a href=\""+link+"\">Add to Cart</a></h4>");
