@@ -34,7 +34,7 @@
 		out.println("<h2>Customer Profile</h2>");
 
 		// TODO: Print Customer information
-		String sql_selectCustomer = "SELECT customerId, firstName, lastName, email, phonenum, address, city, state, postalCode, country, userid FROM customer WHERE userID = ?";
+		String sql_selectCustomer = "SELECT customerId, firstName, lastName, email, phonenum, address, city, state, postalCode, country, userid, admin FROM customer WHERE userID = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql_selectCustomer);
 		pstmt.setString(1, userName);
     	ResultSet rst = pstmt.executeQuery();
@@ -55,6 +55,7 @@
 				"<tr><th>Postal Code</th><td>"+rst.getString("postalCode")+"</td></tr>"+
 				"<tr><th>Country</th><td>"+rst.getString("country")+"</td></tr>"+
 				"<tr><th>User id</th><td>"+rst.getString("userid")+"</td></tr>"+
+				"<tr><th>Admin</th><td>"+rst.getString("admin")+"</td></tr>"+
 				"</tbody></table>");
 			String link = "listcustomerorder.jsp?id="+rst.getInt(1);
 			out.println("<h2><a href=\""+link+"\">List My Orders</a></h2>");
