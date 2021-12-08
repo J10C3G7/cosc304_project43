@@ -1,20 +1,17 @@
 <%@ page import="java.util.Locale" %>
 <%@ include file="jdbc.jsp" %>
+<%@ include file="logoutadmin.jsp"%>
 <%@ include file="auth.jsp"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>The Nostalgic Gamer - Customer Page</title>
-	<style>
-		table, tr, th, td {
-		  border: 1px solid black;
-		}
-	</style>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-
-<%@ include file="header.jsp" %>
+<body class="col-md-12" align="center">
+	<%@ include file="header.jsp" %>
+<div style="margin:0 auto;text-align:center;display:inline">
 
 <% String userName = (String) session.getAttribute("authenticatedUser"); %>
 
@@ -42,10 +39,11 @@
 		pstmt.setString(1, userName);
     	ResultSet rst = pstmt.executeQuery();
 		
-		if(rst.next() == false) {
+
+		if(rst.next() == false){
 			out.println("<h3>Error: Invalid Username</h3>");
 		} else {
-			out.print("<table><tbody>"+
+			out.println("<table style=\"display:inline\"><tbody>"+
 				"<tr><th>Id</th><td>"+rst.getInt("customerId")+"</td></tr>"+
 				"<tr><th>First Name</th><td>"+rst.getString("firstName")+"</td></tr>"+
 				"<tr><th>Last Name</th><td>"+rst.getString("lastName")+"</td></tr>"+
@@ -58,6 +56,8 @@
 				"<tr><th>Country</th><td>"+rst.getString("country")+"</td></tr>"+
 				"<tr><th>User id</th><td>"+rst.getString("userid")+"</td></tr>"+
 				"</tbody></table>");
+			String link = "listcustomerorder.jsp?id="+rst.getInt(1);
+			out.println("<h2><a href=\""+link+"\">List My Orders</a></h2>");
 		}
 		
 
@@ -67,6 +67,7 @@
 %>
 
 <h2><a href="index.jsp">Back to Main Page</a></h2>
+</div>
 </body>
 </html>
 

@@ -4,13 +4,16 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
+<%@ include file="logoutadmin.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Your Shopping Cart</title>
+	<title>Your Shopping Cart</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="col-md-12" align="center">
 	<%@ include file="header.jsp" %>
+<div style="margin:0 auto;text-align:center;display:inline">
 <%
 // Get the current list of products
 @SuppressWarnings({"unchecked"})
@@ -25,7 +28,7 @@ else
 	NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
 	out.println("<h1>Your Shopping Cart</h1>");
-	out.print("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
+	out.print("<table style=\"display:inline\"><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
 	out.println("<th>Price</th><th>Subtotal</th></tr>");
 
 	double total =0;
@@ -78,6 +81,8 @@ else
 }
 %>
 <h2><a href="listprod.jsp">Continue Shopping</a></h2>
+
+</div>
 </body>
 </html> 
 

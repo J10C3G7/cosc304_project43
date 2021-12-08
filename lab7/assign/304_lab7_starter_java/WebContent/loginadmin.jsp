@@ -17,7 +17,7 @@ if (session.getAttribute("loginMessage") != null)
 %>
 
 <br>
-<form name="MyForm" method=post action="validateLogin.jsp">
+<form name="MyForm" method=post action="validateLoginadmin.jsp">
 <table style="display:inline">
 <tr>
 	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Username:</font></div></td>

@@ -9,14 +9,17 @@
 <%@ page import="java.util.Locale" %>
 <%@	page import="java.text.SimpleDateFormat" %> 
 <%@	page import="java.util.Date" %>
+<%@ include file="logoutadmin.jsp"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>The Nostalgic Gamer Order Processing</title>
+	<title>The Nostalgic Gamer Order Processing</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="col-md-12" align="center">
 	<%@ include file="header.jsp" %>
+<div style="margin:0 auto;text-align:center;display:inline">
 <% 
 // Get customer id
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
@@ -103,7 +106,7 @@ try(Connection con = DriverManager.getConnection(url, uid, pw);
 			totalAmount = 0.0;
 			sql = "SELECT A.productId, productName, quantity, price FROM orderproduct A JOIN product B ON A.productId = B.productId WHERE A.orderId = "+orderId;
 			rst = stmt.executeQuery(sql);
-			out.println("<table><tbody><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
+			out.println("<table style=\"display:inline\"><tbody><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 			while(rst.next()){
 				out.println("<tr><td>"+rst.getInt(1)+"</td>"+"<td>"+rst.getString(2)+"</td><td align=center>"+rst.getInt(3)+"</td><td align=right>"+currFormat.format(rst.getDouble(4))+"</td><td align=right>"+currFormat.format(rst.getDouble(4)*rst.getInt(3))+"</td></tr>");
 				totalAmount += rst.getDouble(4)*rst.getInt(3);
@@ -124,6 +127,7 @@ catch(NumberFormatException f){out.println(f);}
 
 %>
 
+</div>
 </body>
 </html>
 

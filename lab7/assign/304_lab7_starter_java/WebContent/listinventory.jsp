@@ -40,25 +40,25 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 
 	// Write query to retrieve all order summary records
 	// For each order in the ResultSet
-	ResultSet rst = stmt.executeQuery("SELECT A.orderId, orderDate, C.customerId, firstName, lastName, totalAmount FROM ordersummary A LEFT Join customer C ON A.customerId = C.customerId");
+	ResultSet rst = stmt.executeQuery("SELECT productId, productName, productPrice FROM product");
 	
 	// Write a query to retrieve the products in the order
 	//   - Use a PreparedStatement as will repeat this query many times
 	PreparedStatement pstmt = null; 
 	ResultSet rst_2 = null;
 	
-	String sql = "SELECT * FROM orderproduct WHERE orderproduct.orderId = ?";
+	String sql = "SELECT warehouseId, quantity, price FROM productinventory WHERE productId = ?";
 	
 	// Print out the order summary information	
-	out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\" style=\"display:inline\"><tbody><tr><th>Order Id</th><th>Order Date</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th></tr>");
+	out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tbody><tr><th>Product ID</th><th>Product Name</th><th>Price</th></tr>");
 	while (rst.next()){
-		out.println("<tr><td>"+rst.getInt(1)+"</td>"+"<td>"+rst.getTimestamp(2)+"</td>"+"<td>"+rst.getInt(3)+"</td>"+"<td>"+rst.getString(4)+" "+rst.getString(5)+"</td>"+"<td>"+currFormat.format(rst.getDouble(6))+"</td></tr>");
-		out.println("<tr align=right><td colspan=5><table class=\"table\" border=\"1\"><tbody><tr><th>Product Id</th><th>Quantity</th><th>Price</th></tr>");
+		out.println("<tr><td>"+rst.getInt(1)+"</td><td>"+rst.getString(2)+"</td><td>"+currFormat.format(rst.getDouble(3))+"</td></tr>");
+		out.println("<tr align=right><td colspan=5><table class=\"table table-hover\" border=\"1\"><tbody><tr><th>Warehouse Id</th><th>Quantity</th><th>Price</th></tr>");
 		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, rst.getInt(1));
 		rst_2 = pstmt.executeQuery();
 		while(rst_2.next())
-			out.println("<tr><td>"+rst_2.getInt(2)+"</td>"+"<td>"+rst_2.getInt(3)+"</td>"+"<td>"+currFormat.format(rst_2.getDouble(4))+"</td></tr>");
+			out.println("<tr><td>"+rst_2.getInt(1)+"</td>"+"<td>"+rst_2.getInt(2)+"</td>"+"<td>"+currFormat.format(rst_2.getDouble(3))+"</td></tr>");
 		out.println("</tbody></table></td></tr>");
 	}
 	out.println("</tbody></table></font></tr>");

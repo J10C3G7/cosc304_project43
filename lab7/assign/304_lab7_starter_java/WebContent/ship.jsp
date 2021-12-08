@@ -7,14 +7,16 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Locale" %>
 <%@ include file="jdbc.jsp" %>
+<%@ include file="logoutadmin.jsp"%>
 
 <html>
 	<head>
 		<title>The Nostalgic Gamer - Shipment Processing</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
 	</head>
-	<body>
-			
-	<%@ include file="header.jsp" %>
+	<body class="col-md-12" align="center">
+		<%@ include file="header.jsp" %>
+	<div style="margin:0 auto;text-align:center;display:inline">
 
 	<%
 		// TODO: Get order id
@@ -122,5 +124,6 @@
 	%>                       				
 
 	<h2><a href="index.jsp">Back to Main Page</a></h2>
+	</div>
 	</body>
 </html>
