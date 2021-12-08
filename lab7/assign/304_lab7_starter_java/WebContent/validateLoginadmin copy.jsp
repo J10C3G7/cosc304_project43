@@ -14,7 +14,7 @@
 	if(authenticatedUser != null)
 		response.sendRedirect("admin.jsp");		// Successful login
 	else
-		response.sendRedirect("login.jsp");		// Failed login - redirect back to login page with a message 
+		response.sendRedirect("loginadmin.jsp");		// Failed login - redirect back to login page with a message 
 %>
 
 
@@ -46,7 +46,7 @@
 				Statement stmt = con.createStatement();) 
 		{
 			// TODO: Check if userId and password match some customer account. If so, set retStr to be the username.
-			String sql = "SELECT userId FROM customer WHERE userId = ? AND password = ?";
+			String sql = "SELECT userId FROM admin WHERE userId = ? AND password = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
@@ -56,19 +56,8 @@
 				// username and password match existing account
 				retStr = username;
 			} else {
-				sql = "SELECT userId FROM admin WHERE userId = ? AND password = ?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, username);
-				pstmt.setString(2, password);
-				rst = pstmt.executeQuery();
-
-				if(rst.next() != false) {
-					// username and password match existing account
-					retStr = username;
-				} else {
-					// no such account exists
-					retStr = null;
-				}
+				// no such account exists
+				retStr = null;
 			}
 		} 
 		catch (SQLException ex) {
@@ -77,7 +66,7 @@
 		
 		if(retStr != null)
 		{	session.removeAttribute("loginMessage");
-			session.setAttribute("authenticatedUser",username);
+			session.setAttribute("authenticatedAdmin",username);
 		}
 		else
 			session.setAttribute("loginMessage","Could not connect to the system using that username/password.");
