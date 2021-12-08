@@ -67,7 +67,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	if(!boolean_Pname){
 		if(!boolean_Cname){
 			out.println("<h2>All Products</h2>");
-			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th colspan=2>Product Name</th><th>Category</th><th>Price</th></tr>");
 			pstmt = con.prepareStatement(sql);
 			rst = pstmt.executeQuery();
 			while (rst.next()){
@@ -76,11 +76,11 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
 		
 			}
-			out.println("</table></font>");
+			out.println("</font></table>");
 		}
 		else{
 			out.println("<h2>Products in category: '"+cname+"'</h2>");
-			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
 			temp1 = "%"+cname+"%";
 			sql += " WHERE categoryName LIKE ?";
 			pstmt = con.prepareStatement(sql);
@@ -91,14 +91,14 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 				link2 = "product.jsp?id="+rst.getInt(1);
 				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
 			}
-			out.println("</table></table></font>");
+			out.println("</font></table>");
 		}
 
 	}
 	else{
 		if(!boolean_Cname){
 			out.println("<h2>Products containing '"+pname+"'</h2>");
-			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th colspan=2>Product Name</th><th>Category</th><th>Price</th></tr>");
 			temp1 = "%"+pname+"%";
 			sql += " WHERE productName LIKE ?";
 			pstmt = con.prepareStatement(sql);
@@ -109,11 +109,11 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 				link2 = "product.jsp?id="+rst.getInt(1);
 				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
 			}
-			out.println("</table></font>");
+			out.println("</font></table>");
 		}
 		else{
 			out.println("<h2>Products containing '"+pname+"' in category: '"+cname+"'</h2>");
-			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th colspan=2>Product Name</th><th>Category</th><th>Price</th></tr>");
 			temp1 = "%"+pname+"%";
 			temp2 = "%"+cname+"%";
 			sql += " WHERE productName LIKE ? AND categoryName LIKE ?";
@@ -126,7 +126,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 				link2 = "product.jsp?id="+rst.getInt(1);
 				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
 			}
-			out.println("</table></font>");
+			out.println("</font></table>");
 		}
 	}	
 }
