@@ -5,6 +5,7 @@
         <title>The Nostalgic Gamer Main Page</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="col-md-12" align="center">
         <%@ include file="header.jsp" %>
         <div style="margin:0 auto;text-align:center;display:inline">

@@ -2,23 +2,26 @@
 <%@ page import="java.util.Scanner" %>
 <%@ page import="java.io.File" %>
 <%@ include file="jdbc.jsp" %>
-<%@ include file="authadmin.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>Refreash Database</title>
+<title>Your Shopping Cart</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="col-md-12" align="center">
+<bodyclass="col-md-12" align="center">
 <%@ include file="header.jsp" %>
 <%
 String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
 String uid = "SA";
 String pw = "YourStrong@Passw0rd";
 
-//String url = "jdbc:sqlserver://cosc304.ok.ubc.ca:1433;DatabaseName=db_jguigon;";
+//String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_jguigon;";
 //String uid = "jguigon";
-//String pw = "52744570";
+//String pw = "test";
+//String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;databaseName=WorksOn;";
+//String uid = "rlawrenc";
+//String pw = "test";
 out.print("<h1>Connecting to database.</h1><br>");
 
 Connection con = DriverManager.getConnection(url, uid, pw);
@@ -55,7 +58,8 @@ try
 catch (Exception e)
 {
     out.print(e);
-}  
+} 
+
 %>
 </body>
 </html> 

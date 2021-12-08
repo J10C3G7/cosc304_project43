@@ -28,7 +28,7 @@ public class LoadData
 
 		Connection con = DriverManager.getConnection(url, uid, pw);
 				
-		String fileName = "data/orderdb_sql.ddl";
+		String fileName = "../WebContent/orderdb_sql.ddl";
 		
 	    try
 	    {
