@@ -24,8 +24,6 @@
         <h2 align="center"><a href="editinventory.jsp">Edit Inventory</a></h2>
 
         <h2 align="center"><a href="loaddata.jsp">Load/Restore Database</a></h2>
-
-        <h2 align="center"><a href="index.jsp">Log Out</a></h2>
 <%
 
 // TODO: Writ SQL query that prints out total order amount by day
