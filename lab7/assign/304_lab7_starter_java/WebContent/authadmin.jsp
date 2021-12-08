@@ -7,6 +7,10 @@
         session.setAttribute("loginMessage",loginMessage);        
 		response.sendRedirect("loginadmin.jsp");
 	} else {
+		String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
+		String uid = "SA";
+		String pw = "YourStrong@Passw0rd";
+
 		try {	
 			// Load driver class
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

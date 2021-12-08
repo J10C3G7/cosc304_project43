@@ -50,7 +50,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	String sql = "SELECT * FROM orderproduct WHERE orderproduct.orderId = ?";
 	
 	// Print out the order summary information	
-	out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table\" border=\"1\" style=\"display:inline\"><tbody><tr><th>Order Id</th><th>Order Date</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th></tr>");
+	out.println("<table class=\"table\" border=\"1\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tbody><tr><th>Order Id</th><th>Order Date</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th></tr>");
 	while (rst.next()){
 		out.println("<tr><td>"+rst.getInt(1)+"</td>"+"<td>"+rst.getTimestamp(2)+"</td>"+"<td>"+rst.getInt(3)+"</td>"+"<td>"+rst.getString(4)+" "+rst.getString(5)+"</td>"+"<td>"+currFormat.format(rst.getDouble(6))+"</td></tr>");
 		out.println("<tr align=right><td colspan=5><table class=\"table\" border=\"1\"><tbody><tr><th>Product Id</th><th>Quantity</th><th>Price</th></tr>");
@@ -61,7 +61,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 			out.println("<tr><td>"+rst_2.getInt(2)+"</td>"+"<td>"+rst_2.getInt(3)+"</td>"+"<td>"+currFormat.format(rst_2.getDouble(4))+"</td></tr>");
 		out.println("</tbody></table></td></tr>");
 	}
-	out.println("</tbody></table></font></tr>");
+	out.println("</tbody></font></table>");
 }
 catch (SQLException ex) {
  	out.println(ex); 

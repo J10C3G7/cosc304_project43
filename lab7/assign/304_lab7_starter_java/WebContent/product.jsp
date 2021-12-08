@@ -46,15 +46,15 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
     out.println("<table class=\"table\" align=\"center\" style=\"display:inline\"><tbody>");
     // TODO: If there is a productImageURL, display using IMG tag
     if(rst.getString(2)!=null)
-        out.print("<tr><td><img src=\""+rst.getString(2)+"\"></td></tr>");
+        out.print("<tr><td colspan = 2><img src=\""+rst.getString(2)+"\"></td></tr>");
     // TODO: Retrieve any image stored directly in database. Note: Call displayImage.jsp with product id as parameter.
     if(rst.getBytes(5) != null){
         link = "displayImage.jsp?id="+rst.getInt(3);
-        out.println("<tr><td><img src=\""+link+"\"></td></tr>");
+        out.println("<tr><td colspan = 2><img src=\""+link+"\"></td></tr>");
     }
     out.println("<tr><th>Id:</th><td>"+rst.getInt(3)+"</td></tr><tr><th>Price:</th><td>"+currFormat.format(rst.getDouble(4))+"</td></tr><tr><th>Description:</th><td>"+rst.getString(6)+"</td></tr><tr><th>Inventory:</th>");
     
-    out.println("<td colspan=5><table class=\"table table-hover\" border=\"1\"><tbody><tr><th>Warehouse Id</th><th>Quantity</th></tr>");
+    out.println("<td><table class=\"table table-hover\" border=\"1\"><tbody><tr><th>Warehouse Id</th><th>Quantity</th></tr>");
     sql = "SELECT warehouseid, quantity FROM productinventory WHERE productId = "+productId;
     pstmt = con.prepareStatement(sql);
     ResultSet rst_2 = pstmt.executeQuery();
