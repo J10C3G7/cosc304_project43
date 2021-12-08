@@ -3,18 +3,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="authadmin.jsp"%>
 
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-	<title>The Nostalgic Gamer</title>
+	<title>Nostalgic Gaming - Edit Inventory</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 
-<body>
+<body class="col-md-12" align="center">
 <%@ include file="header.jsp" %>
-<div style="margin:0 auto;text-align:center;display:inline">
+<div class = "row" style="background-color:#9eb4ff">
 
-	<h1>Add Inventory, All Fields Must Be Filled:</h1>
+	<h2>Add Inventory, All Fields Must Be Filled:</h2>
     <br>
     <form method="get" action="editinventory.jsp">
         <table style="display:inline">
@@ -102,7 +102,7 @@
                                 pstmt.setString(3, val3);
                                 pstmt.setString(4, val4);
                                 pstmt.executeUpdate();
-                                out.println("<h2>Inventory Change Has Been Made</h2>");
+                                out.println("<h3>Inventory Change Has Been Made</h3>");
                             }else{
                                 sql_prod = "SELECT productPrice FROM product WHERE productId = " + prodId;
                                 pstmt = con.prepareStatement(sql_prod);
@@ -113,31 +113,34 @@
                                 pstmt = con.prepareStatement(sql_up);
                                 pstmt.setString(1, val1);
                                 pstmt.executeUpdate();
-                                out.println("<h2>Inventory Change Has Been Made</h2>");
+                                out.println("<h3>Inventory Change Has Been Made</h3>");
                             }
                         }else{
-                            out.println("<h2>Invalid Warehouse Id</h2>");
+                            out.println("<h3>Invalid Warehouse Id</h3>");
                         }
                     }else{
-                        out.println("<h2>Invalid Product Id</h2>");
+                        out.println("<h3>Invalid Product Id</h3>");
                     }
                     	
                 }else{
-                    out.println("<h2>Enter Product Id, Warehouse Id, Quantity</h2>");
+                    out.println("<h3>Enter Product Id, Warehouse Id, Quantity</h3>");
                 }
                 
             }else{
-                out.println("<h2>Enter Product Id, Warehouse Id, Quantity</h2>");
+                out.println("<h3>Enter Product Id, Warehouse Id, Quantity</h3>");
             }
             
         }else{
-            out.println("<h2>Enter Product Id, Warehouse Id, Quantity</h2>");
+            out.println("<h3>Enter Product Id, Warehouse Id, Quantity</h3>");
         }
     }
     catch (SQLException ex) {
         out.println(ex); 
     }
     %>
+    <h4>
+        <a style="color:#333333" href="admin.jsp">Back to Admin Portal</a>
+    </h4>
 </div>
 </body>
 </html>

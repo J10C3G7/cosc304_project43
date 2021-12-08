@@ -5,15 +5,15 @@
 <%@ include file="authadmin.jsp"%>
 
 <!DOCTYPE html>
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-	<title>The Nostalgic Gamer Order List</title>
+	<title>Nostalgic Gaming - Inventory List</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="col-md-12" align="center">
 	<%@ include file="header.jsp" %>
-<div style="margin:0 auto;text-align:center;display:inline">
-<h1>Order List</h1>
+	<div class = "row" style="background-color:#9eb4ff">
+<h1>Inventory List</h1>
 
 <%
 Locale.setDefault(new Locale("en","CA"));
@@ -50,10 +50,10 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	String sql = "SELECT warehouseId, quantity, price FROM productinventory WHERE productId = ?";
 	
 	// Print out the order summary information	
-	out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tbody><tr><th>Product ID</th><th>Product Name</th><th>Price</th></tr>");
+	out.println("<table class=\"table\" style=\"display:inline\"><tbody><tr><th>Product ID</th><th>Product Name</th><th>Price</th></tr>");
 	while (rst.next()){
 		out.println("<tr><td>"+rst.getInt(1)+"</td><td>"+rst.getString(2)+"</td><td>"+currFormat.format(rst.getDouble(3))+"</td></tr>");
-		out.println("<tr align=right><td colspan=5><table class=\"table table-hover\" border=\"1\"><tbody><tr><th>Warehouse Id</th><th>Quantity</th><th>Price</th></tr>");
+		out.println("<tr align=right><td colspan=5><table class=\"table\" style=\"background-color:#9eb4ff\" border=\"2\"><tbody><tr><th>Warehouse Id</th><th>Quantity</th><th>Price</th></tr>");
 		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, rst.getInt(1));
 		rst_2 = pstmt.executeQuery();
@@ -61,13 +61,16 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 			out.println("<tr><td>"+rst_2.getInt(1)+"</td>"+"<td>"+rst_2.getInt(2)+"</td>"+"<td>"+currFormat.format(rst_2.getDouble(3))+"</td></tr>");
 		out.println("</tbody></table></td></tr>");
 	}
-	out.println("</tbody></table></font></tr>");
+	out.println("</tbody></table></tr>");
 }
 catch (SQLException ex) {
  	out.println(ex); 
 }
 // Close connection
 %>
+<h4>
+    <a style="color:#333333" href="admin.jsp">Back to Admin Portal</a>
+</h4>
 </div>
 </body>
 </html>

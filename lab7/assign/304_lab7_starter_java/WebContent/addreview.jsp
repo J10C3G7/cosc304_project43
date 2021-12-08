@@ -4,17 +4,15 @@
 <%@ page import="java.sql.*,java.net.URLEncoder" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
-<%@ include file="logoutadmin.jsp"%>
 <%@ include file="auth.jsp"%>
 
-<html>
-<head>
-	<title>The Nostalgic Gamer</title>
+<html style="background-color:#9eb4ff"><head>
+	<title>Nostalgic Gaming - Add Review</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="col-md-12" align="center">
     <%@ include file="header.jsp" %>
-    <div style="margin:0 auto;text-align:center;display:inline">
+    <div class = "row" style="background-color:#9eb4ff">
 <h3>Enter Review:</h3>
 <br>
 <form method="get" action="addreview.jsp">
@@ -158,7 +156,7 @@
     }
     
     %>
-    <h2><a href="index.jsp">Back to Main Page</a></h2>
+    <h3><a style="color:#333333" href="listprod.jsp">Back to the Shop</a></h3>
 </div>
 </body>
 </html>

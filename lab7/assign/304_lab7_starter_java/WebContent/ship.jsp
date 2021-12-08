@@ -7,17 +7,17 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Locale" %>
 <%@ include file="jdbc.jsp" %>
-<%@ include file="logoutadmin.jsp"%>
+<%@ include file="authadmin.jsp"%>
 
-<html>
+<html style="background-color:#9eb4ff">
 	<head>
-		<title>The Nostalgic Gamer - Shipment Processing</title>
+		<title>Nostalgic Gaming - Shipment Processing</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 	</head>
 	<body class="col-md-12" align="center">
 		<%@ include file="header.jsp" %>
-	<div style="margin:0 auto;text-align:center;display:inline">
-
+		<div class = "row" style="background-color:#9eb4ff">
+			
 	<%
 		// TODO: Get order id
 		String orderId = request.getParameter("orderId");
@@ -95,8 +95,8 @@
 						pstmt_updateInventory.setInt(3, 1);  // warehouseId
 						pstmt_updateInventory.executeUpdate();
 
-						out.println("<h2>Ordered Product: " + rst_selectProducts.getInt("productId") + "\tQty: " + rst_selectProducts.getInt("quantity") + 
-								"\tPrevious inventory: " + rst_selectProducts.getInt("prevInv") + "\tNew inventory: " + rst_selectProducts.getInt("newInv") + "</h2>");
+						out.println("<h3>Ordered Product: " + rst_selectProducts.getInt("productId") + "\tQty: " + rst_selectProducts.getInt("quantity") + 
+								"\tPrevious inventory: " + rst_selectProducts.getInt("prevInv") + "\tNew inventory: " + rst_selectProducts.getInt("newInv") + "</h3>");
 					
 					} else {  // if there is insufficient inventory
 						allSufficientInventory = false;
@@ -105,7 +105,7 @@
 					}
 				}
 				if(allSufficientInventory) {
-					out.println("<h1>Shipment successfully processed.</h1>");
+					out.println("<h2>Shipment successfully processed.</h2>");
 					con.commit();
 
 				} else {
@@ -122,8 +122,9 @@
 			out.println(ex); 
 		}
 	%>                       				
-
-	<h2><a href="index.jsp">Back to Main Page</a></h2>
+	<h4>
+		<a style="color:#333333" href="admin.jsp">Back to Admin Portal</a>
+	</h4>
 	</div>
 	</body>
 </html>

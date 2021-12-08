@@ -3,20 +3,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="authadmin.jsp"%>
 
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-	<title>The Nostalgic Gamer- Customer List</title>
+	<title>Nostalgic Gaming - Customer List</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="col-md-12" align="center">
     <%@ include file="header.jsp" %>
-    <div style="margin:0 auto;text-align:center;display:inline">
-    	<h1>Search by Customer ID:</h1>
+    <div class = "row" style="background-color:#9eb4ff">
+    	<h2>Search by Customer ID:</h2>
 
 	<form method="get" action="listcustomers.jsp">
 	<input type="text" name="customerId" size="50">
-	<input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all products)
+	<input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all customers)
 	</form>
 
     <% // Get product name to search for
@@ -46,8 +46,8 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	ResultSet rst = null;
 	
 	if(!boolean_custId){
-			out.println("<h2>All Products</h2>");
-			out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tr>"+
+			out.println("<h3>All Products</h3>");
+			out.println("<table class=\"table table-hover\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr>"+
                 "<th>Customer ID</th><th>Customer Name</th><th>email</th><th>Phone Number</th><th>Address</th>"+
                 "<th>City</th><th>State</th><th>Postal Code</th><th>Country</th><th>User ID</th><th>Password</th></tr>");
 			pstmt = con.prepareStatement(sql);
@@ -58,10 +58,10 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
                     "<td>"+rst.getString(7)+"</td><td>"+rst.getString(8)+"</td><td>"+rst.getString(9)+"</td>"+
                     "<td>"+rst.getString(10)+"</td><td>"+rst.getString(11)+"</td><td>"+rst.getString(12)+"</td></tr>");
 			}
-			out.println("</table></font>");
+			out.println("</font></table>");
 	}
 	else{
-        out.println("<font face=\"Century Gothic\" size=\"2\"><table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><tr>"+
+        out.println("<table class=\"table table-hover\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr>"+
             "<th>Customer ID</th><th>Customer Name</th><th>email</th><th>Phone Number</th><th>Address</th>"+
             "<th>City</th><th>State</th><th>Postal Code</th><th>Country</th><th>User ID</th><th>Password</th></tr>");
 			temp1 = "%"+pname+"%";
@@ -75,13 +75,17 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
                     "<td>"+rst.getString(7)+"</td><td>"+rst.getString(8)+"</td><td>"+rst.getString(9)+"</td>"+
                     "<td>"+rst.getString(10)+"</td><td>"+rst.getString(11)+"</td><td>"+rst.getString(12)+"</td></tr>");
 			}
-			out.println("</table></font>");
+			out.println("</font></table>");
 	}	
 }
 catch (SQLException ex) {
  	out.println(ex); 
 }
-%>
+%>	
+	<h4>
+		<a style="color:#333333" href="admin.jsp">Back to Admin Portal</a>
+	</h4>
     </div>
+
 </body>
 </html>

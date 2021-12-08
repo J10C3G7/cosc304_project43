@@ -3,16 +3,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="jdbc.jsp" %>
 <%@ page import="java.util.Locale" %>
-<%@ include file="logoutadmin.jsp"%>
 
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-<title>The Nostalgic Gamer - Product Information</title>
+<title>Nostalgic Gaming - Product Information</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="col-md-12" align="center">
 	<%@ include file="header.jsp" %>
-<div style="margin:0 auto;text-align:center;display:inline">
+    <div class = "row" style="background-color:#9eb4ff">
 
 <%
 // Get product name to search for
@@ -54,7 +53,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
     }
     out.println("<tr><th>Id:</th><td>"+rst.getInt(3)+"</td></tr><tr><th>Price:</th><td>"+currFormat.format(rst.getDouble(4))+"</td></tr><tr><th>Description:</th><td>"+rst.getString(6)+"</td></tr><tr><th>Inventory:</th>");
     
-    out.println("<td><table class=\"table table-hover\" border=\"1\"><tbody><tr><th>Warehouse Id</th><th>Quantity</th></tr>");
+    out.println("<td><table class=\"table\" border=\"2\" style=\"background-color:#9eb4ff\"><tbody><tr><th>Warehouse Id</th><th>Quantity</th></tr>");
     sql = "SELECT warehouseid, quantity FROM productinventory WHERE productId = "+productId;
     pstmt = con.prepareStatement(sql);
     ResultSet rst_2 = pstmt.executeQuery();
@@ -64,23 +63,23 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
     out.println("</tbody></table>");
     // TODO: Add links to Add to Cart and Continue Shopping
     link = "addcart.jsp?id="+rst.getInt(3)+"&name="+rst.getString(1)+"&price="+rst.getDouble(4);
-    out.println("<h4><a href=\""+link+"\">Add to Cart</a></h4>");
+    out.println("<h4><a style=\"color:#333333\" href=\""+link+"\">Add to Cart</a></h4>");
 }catch (SQLException ex) {
     out.println(ex); 
 }
 %>
 
 <h4>
-    <a href="listprod.jsp">Continue Shopping</a>
+    <a style="color:#333333" href="listprod.jsp">Continue Shopping</a>
 </h4>
 <%
-    out.println("<h4><a href=\"addreview.jsp?id="+productId+"\">Add a Review</a></h4>");
+    out.println("<h4><a style=\"color:#333333\" href=\"addreview.jsp?id="+productId+"\">Add a Review</a></h4>");
 try ( Connection con = DriverManager.getConnection(url, uid, pw);
       Statement stmt = con.createStatement();) {
     String sql = "SELECT C.customerId, firstName, lastName, reviewRating, reviewComment FROM review R JOIN customer C ON R.customerId = C.customerId WHERE productId = "+productId;
     PreparedStatement pstmt= con.prepareStatement(sql);
     ResultSet rst = pstmt.executeQuery();
-    out.println("<table class=\"table\" align=\"center\" style=\"display:inline\"><tbody><tr><th>Cust ID</th><th>Customer Name</th><th>Review Rating</th><th>Review</th></tr>");
+    out.println("<table class=\"table table-hover\" align=\"center\" style=\"display:inline\"><tbody><tr><th>Cust ID</th><th>Customer Name</th><th>Review Rating</th><th>Review</th></tr>");
     while(rst.next()){
         out.println("<tr><td>"+rst.getInt(1)+"</td>"+
         "<td>"+rst.getString(2)+" "+rst.getString(3)+"</td><td>"+rst.getInt(4)+"</td><td>"+rst.getString(5)+"</td>");

@@ -1,8 +1,7 @@
-<%@ include file="logoutadmin.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>The Nostalgic Gamer CheckOut Line</title>
+    <title>Nostalgic Gaming - CheckOut Line</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="col-md-12" align="center">

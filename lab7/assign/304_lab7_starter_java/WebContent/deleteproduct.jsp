@@ -5,7 +5,7 @@
 
 <html>
 <head>
-	<title>The Nostalgic Gamer</title>
+	<title>Nostalgic Gaming - Remove Product</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 

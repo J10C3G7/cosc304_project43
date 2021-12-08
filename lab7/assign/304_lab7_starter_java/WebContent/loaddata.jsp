@@ -4,13 +4,14 @@
 <%@ include file="jdbc.jsp" %>
 <%@ include file="authadmin.jsp"%>
 <!DOCTYPE html>
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-<title>Refreash Database</title>
+<title>Nostalgic Gaming - Refreash Database</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="col-md-12" align="center">
 <%@ include file="header.jsp" %>
+<div class = "row" style="background-color:#9eb4ff">
 <%
 String url = "jdbc:sqlserver://db:1433;DatabaseName=tempdb;";
 String uid = "SA";
@@ -57,5 +58,6 @@ catch (Exception e)
     out.print(e);
 }  
 %>
+</div>
 </body>
 </html> 
