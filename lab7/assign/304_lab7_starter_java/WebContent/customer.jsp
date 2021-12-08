@@ -1,17 +1,16 @@
 <%@ page import="java.util.Locale" %>
 <%@ include file="jdbc.jsp" %>
-<%@ include file="logoutadmin.jsp"%>
 <%@ include file="auth.jsp"%>
 
 <!DOCTYPE html>
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-	<title>The Nostalgic Gamer - Customer Page</title>
+	<title>Nostalgic Gaming - Customer Page</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="col-md-12" align="center">
 	<%@ include file="header.jsp" %>
-<div style="margin:0 auto;text-align:center;display:inline">
+	<div class = "row" style="background-color:#9eb4ff">
 
 <% String userName = (String) session.getAttribute("authenticatedUser"); %>
 
@@ -43,7 +42,7 @@
 		if(rst.next() == false){
 			out.println("<h3>Error: Invalid Username</h3>");
 		} else {
-			out.println("<table style=\"display:inline\"><tbody>"+
+			out.println("<table style=\"display:inline\"><tbody><font face=\"Century Gothic\" size=\"2\">"+
 				"<tr><th>Id</th><td>"+rst.getInt("customerId")+"</td></tr>"+
 				"<tr><th>First Name</th><td>"+rst.getString("firstName")+"</td></tr>"+
 				"<tr><th>Last Name</th><td>"+rst.getString("lastName")+"</td></tr>"+
@@ -56,9 +55,9 @@
 				"<tr><th>Country</th><td>"+rst.getString("country")+"</td></tr>"+
 				"<tr><th>User id</th><td>"+rst.getString("userid")+"</td></tr>"+
 				"<tr><th>Admin</th><td>"+rst.getString("admin")+"</td></tr>"+
-				"</tbody></table>");
+				"</font></tbody></table>");
 			String link = "listcustomerorder.jsp?id="+rst.getInt(1);
-			out.println("<h2><a href=\""+link+"\">List My Orders</a></h2>");
+			out.println("<h3><a style=\"color:#333333\" href=\""+link+"\">List My Orders</a></h3>");
 		}
 		
 
@@ -67,7 +66,7 @@
 	}
 %>
 
-<h2><a href="index.jsp">Back to Main Page</a></h2>
+<h3><a style="color:#333333" href="index.jsp">Back to Main Page</a></h3>
 </div>
 </body>
 </html>

@@ -2,33 +2,30 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ page import="java.util.Locale" %>
-<%@ include file="logoutadmin.jsp"%>
 
 
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-	<title>The Nostalgic Gamer</title>
+	<title>Nostalgic Gaming - Shop</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-
-<body class="col-md-12" align="center">
 <%@ include file="header.jsp" %>
-<div style="margin:0 auto;text-align:center;display:inline">
+<div class = "row" style="background-color:#9eb4ff">
+<body class="col-md-12" align="center">
 
-	<h1>Browse Products By Category and Search by Product Name:</h1>
+
+	<h2>Browse Products By Category and Search by Product Name:</h2>
 
 	<form method="get" action="listprod.jsp?">
 		<select size="1" name="categoryName">
 			<option>All</option>
-			<option>Beverages</option>
-			<option>Condiments</option>
-			<option>Confections</option>
-			<option>Dairy Products</option>
-			<option>Grains/Cereals</option>
-			<option>Meat/Poultry</option>
-			<option>Produce</option>
-			<option>Seafood</option>       
+			<option>T-Shirts</option>
+			<option>Comics</option>
+			<option>Posters</option>
+			<option>Video Games</option>
+			<option>Figurines</option>
+			<option>Hats</option>     
 		</select>
 	<input type="text" name="productName" size="50">
 	<input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all products)
@@ -66,21 +63,21 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	
 	if(!boolean_Pname){
 		if(!boolean_Cname){
-			out.println("<h2>All Products</h2>");
-			out.println("<table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th colspan=2>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<h3>All Products</h3>");
+			out.println("<table class=\"table table-hover\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th colspan=2>Product Name</th><th>Category</th><th>Price</th></tr>");
 			pstmt = con.prepareStatement(sql);
 			rst = pstmt.executeQuery();
 			while (rst.next()){
 				link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(4);
 				link2 = "product.jsp?id="+rst.getInt(1);
-				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
+				out.println("<tr><td><a style=\"color:#333333\" href=\""+link+"\">Add to Cart</a></td><td><a style=\"color:#333333\" href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
 		
 			}
 			out.println("</font></table>");
 		}
 		else{
-			out.println("<h2>Products in category: '"+cname+"'</h2>");
-			out.println("<table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<h3>Products in category: '"+cname+"'</h3>");
+			out.println("<table class=\"table table-hover\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
 			temp1 = "%"+cname+"%";
 			sql += " WHERE categoryName LIKE ?";
 			pstmt = con.prepareStatement(sql);
@@ -89,7 +86,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 			while (rst.next()){
 				link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(4);
 				link2 = "product.jsp?id="+rst.getInt(1);
-				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
+				out.println("<tr><td><a style=\"color:#333333\" href=\""+link+"\">Add to Cart</a></td><td><a style=\"color:#333333\" href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
 			}
 			out.println("</font></table>");
 		}
@@ -97,8 +94,8 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	}
 	else{
 		if(!boolean_Cname){
-			out.println("<h2>Products containing '"+pname+"'</h2>");
-			out.println("<table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th colspan=2>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<h3>Products containing '"+pname+"'</h3>");
+			out.println("<table class=\"table table-hover\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th colspan=2>Product Name</th><th>Category</th><th>Price</th></tr>");
 			temp1 = "%"+pname+"%";
 			sql += " WHERE productName LIKE ?";
 			pstmt = con.prepareStatement(sql);
@@ -107,13 +104,13 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 			while (rst.next()){
 				link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(4);
 				link2 = "product.jsp?id="+rst.getInt(1);
-				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
+				out.println("<tr><td><a style=\"color:#333333\" href=\""+link+"\">Add to Cart</a></td><td><a style=\"color:#333333\" href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
 			}
 			out.println("</font></table>");
 		}
 		else{
-			out.println("<h2>Products containing '"+pname+"' in category: '"+cname+"'</h2>");
-			out.println("<table class=\"table table-hover\" border=\"1\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th colspan=2>Product Name</th><th>Category</th><th>Price</th></tr>");
+			out.println("<h3>Products containing '"+pname+"' in category: '"+cname+"'</h3>");
+			out.println("<table class=\"table table-hover\" style=\"display:inline\"><font face=\"Century Gothic\" size=\"2\"><tr><th colspan=2>Product Name</th><th>Category</th><th>Price</th></tr>");
 			temp1 = "%"+pname+"%";
 			temp2 = "%"+cname+"%";
 			sql += " WHERE productName LIKE ? AND categoryName LIKE ?";
@@ -124,7 +121,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 			while (rst.next()){
 				link = "addcart.jsp?id="+rst.getInt(1)+"&name="+rst.getString(2)+"&price="+rst.getDouble(4);
 				link2 = "product.jsp?id="+rst.getInt(1);
-				out.println("<tr><td><a href=\""+link+"\">Add to Cart</a></td><td><a href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
+				out.println("<tr><td><a style=\"color:#333333\" href=\""+link+"\">Add to Cart</a></td><td><a style=\"color:#333333\" href=\""+link2+"\">"+rst.getString(2)+"</a></td><td>"+rst.getString(3)+"</td><td>"+currFormat.format(rst.getDouble(4))+"</td></tr>");
 			}
 			out.println("</font></table>");
 		}
@@ -148,7 +145,7 @@ catch (SQLException ex) {
 // NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 // out.println(currFormat.format(5.0);	// Prints $5.00
 %>
-</div>
-</body>
 
+</body>
+</div>
 </html>

@@ -3,14 +3,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="authadmin.jsp"%>
 
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-	<title>The Nostalgic Gamer</title>
+	<title>Nostalgic Gaming - Add Product</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="col-md-12" align="center">
 <%@ include file="header.jsp" %>
-<div style="margin:0 auto;text-align:center;display:inline">
+<div class = "row" style="background-color:#9eb4ff">
 
 	<h1>Add a Product:</h1>
     <br>
@@ -30,7 +30,7 @@
             <td><input type="text" name="productPrice" size="10" maxlength="10"></td>
         </tr>
         <tr>
-            <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Product Image URL:</font></div></td>
+            <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Product Image Link:</font></div></td>
             <td><input type="text" name="productImageURL" size="50" maxlength="100"></td>
         </tr>
         <tr>
@@ -116,6 +116,9 @@
         out.println(ex); 
     }
     %>
+    <h4>
+        <a style="color:#333333" href="admin.jsp">Back to Admin Portal</a>
+    </h4>
 </div>
 </body>
 </html>

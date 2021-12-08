@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-	<title>Login Screen</title>
+	<title>Nostalgic Gaming - Login Screen</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="col-md-12" align="center">
 	<%@ include file="header.jsp" %>
-<div style="margin:0 auto;text-align:center;display:inline">
+	<div class = "row" style="background-color:#9eb4ff">
 
 <h3>Please Login to System</h3>
 

@@ -5,17 +5,23 @@
 <%@ include file="authadmin.jsp"%>
 
 
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-	<title>The Nostalgic Gamer</title>
+	<title>Nostalgic Gaming - Place Shipment</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<div class = "row" style="background-color:#9eb4ff">
+	<body class="col-md-12" align="center">
 <%@ include file="header.jsp" %>
-<h1>Place Shipment by Entering the Order Id:</h1>
+<h2>Place Shipment by Entering the Order Id:</h2>
 
 <form method="get" action="ship.jsp">
 <input type="text" name="orderId" size="50">
-<input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all products)
+<input type="submit" value="Submit"><input type="reset" value="Reset">
 </form>
+<h4>
+    <a style="color:#333333" href="admin.jsp">Back to Admin Portal</a>
+</h4>
 </body>
+</div>
+</html>

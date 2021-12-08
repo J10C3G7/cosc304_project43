@@ -4,31 +4,31 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
-<%@ include file="logoutadmin.jsp"%>
+
 <!DOCTYPE html>
-<html>
+<html style="background-color:#9eb4ff">
 <head>
-	<title>Your Shopping Cart</title>
+	<title>Nostalgic Gaming - Shopping Cart</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="col-md-12" align="center">
 	<%@ include file="header.jsp" %>
-<div style="margin:0 auto;text-align:center;display:inline">
+	<div class = "row" style="background-color:#9eb4ff">
 <%
 // Get the current list of products
 @SuppressWarnings({"unchecked"})
 HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");
 
 if (productList == null)
-{	out.println("<H1>Your shopping cart is empty!</H1>");
+{	out.println("<H2>Your shopping cart is empty!</H2>");
 	productList = new HashMap<String, ArrayList<Object>>();
 }
 else
 {
 	NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
-	out.println("<h1>Your Shopping Cart</h1>");
-	out.print("<table style=\"display:inline\"><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
+	out.println("<h2>Your Shopping Cart</h2>");
+	out.print("<table class=\"table table-hover\" style=\"display:inline\"><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
 	out.println("<th>Price</th><th>Subtotal</th></tr>");
 
 	double total =0;
@@ -41,9 +41,9 @@ else
 			out.println("Expected product with four entries. Got: "+product);
 			continue;
 		}
-		
+		String link = "product.jsp?id="+product.get(0);
 		out.print("<tr><td>"+product.get(0)+"</td>");
-		out.print("<td>"+product.get(1)+"</td>");
+		out.print("<td><a style=\"color:#333333\" href=\""+link+"\">"+product.get(1)+"</a></td>");
 
 		out.print("<td align=\"center\">"+product.get(3)+"</td>");
 		Object price = product.get(2);
@@ -77,10 +77,10 @@ else
 			+"<td align=\"right\">"+currFormat.format(total)+"</td></tr>");
 	out.println("</table>");
 
-	out.println("<h2><a href=\"checkout.jsp\">Check Out</a></h2>");
+	out.println("<h3><a style=\"color:#333333\" href=\"checkout.jsp\">Check Out</a></h3>");
 }
 %>
-<h2><a href="listprod.jsp">Continue Shopping</a></h2>
+<h3><a style="color:#333333" href="listprod.jsp">Back to the Shop</a></h3>
 
 </div>
 </body>
