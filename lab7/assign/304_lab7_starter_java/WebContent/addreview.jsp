@@ -127,7 +127,7 @@
                                 pstmt.setString(4, val5);
                                 pstmt.executeUpdate();
                                 out.println("<h2>Review Has Been Submitted</h2>");
-                                out.println("<h2><a href=\"product.jsp?id="+prodId+"\">Back to Product Page</a></h2>");
+                                out.println("<h3><a style=\"color:#333333\" href=\"product.jsp?id="+prodId+"\">Back to Product Page</a></h3>");
                             }else{
                                 out.println("<h2>Cannot Write More Than One Review</h2>");
                             }
