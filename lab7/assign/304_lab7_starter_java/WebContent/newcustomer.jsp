@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html style="background-color:#9eb4ff">
 <head>
-	<title>Nostalgic Gaming - Login Screen</title>
+	<title>Nostalgic Gaming - Create an Account</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="col-md-12" align="center">
