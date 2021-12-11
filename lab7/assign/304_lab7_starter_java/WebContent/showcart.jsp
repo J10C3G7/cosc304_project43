@@ -28,8 +28,8 @@ else
 	NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
 	out.println("<h2>Your Shopping Cart</h2>");
-	out.print("<table class=\"table table-hover\" style=\"display:inline\"><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
-	out.println("<th>Price</th><th>Subtotal</th></tr>");
+	out.print("<table class=\"table table-hover\" style=\"display:inline\"><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th><th></th>");
+	out.println("<th>Price</th><th>Subtotal</th><th></th><th></th></tr>");
 
 	double total =0;
 	Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
@@ -46,6 +46,9 @@ else
 		out.print("<td><a style=\"color:#333333\" href=\""+link+"\">"+product.get(1)+"</a></td>");
 
 		out.print("<td align=\"center\">"+product.get(3)+"</td>");
+		out.print("<td><form method=\"get\" action=\"updatecart.jsp\">"+
+			"<input type=\"hidden\" name=\"id\" value=\""+product.get(0)+"\">"+
+			"<input type=\"text\" name=\"prodQuantity\" size=\"3\" maxlength=\"3\">");
 		Object price = product.get(2);
 		Object itemqty = product.get(3);
 		double pr = 0;
@@ -69,12 +72,15 @@ else
 		}		
 
 		out.print("<td align=\"right\">"+currFormat.format(pr)+"</td>");
-		out.print("<td align=\"right\">"+currFormat.format(pr*qty)+"</td></tr>");
+		out.print("<td align=\"right\">"+currFormat.format(pr*qty)+"</td>");
+		out.print("<td><input type=\"submit\" value=\"Submit\"><input type=\"reset\" value=\"Reset\"></form></td>");
+		link = "removecart.jsp?id="+product.get(0);
+		out.println("<td><a style=\"color:#333333\" href=\""+link+"\">Remove from Cart</a></td>");
 		out.println("</tr>");
 		total = total +pr*qty;
 	}
-	out.println("<tr><td colspan=\"4\" align=\"right\"><b>Order Total</b></td>"
-			+"<td align=\"right\">"+currFormat.format(total)+"</td></tr>");
+	out.println("<tr><td colspan=\"5\" align=\"right\"><b>Order Total</b></td>"
+			+"<td align=\"right\">"+currFormat.format(total)+"</td><td></td><td></td></tr>");
 	out.println("</table>");
 
 	out.println("<h3><a style=\"color:#333333\" href=\"checkout.jsp\">Check Out</a></h3>");

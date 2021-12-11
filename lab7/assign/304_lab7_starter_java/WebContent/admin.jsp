@@ -15,8 +15,6 @@
 
         <h2 align="center"><a style="color:#333333" href="listcustomers.jsp">List All Customers</a></h2>
 
-        <h2 align="center"><a style="color:#333333" href="editproduct.jsp">Edit Product List</a></h2>
-
         <h2 align="center"><a style="color:#333333" href="addproduct.jsp">Add to Product List</a></h2>
 
         <h2 align="center"><a style="color:#333333" href="listinventory.jsp">List Inventory</a></h2>
