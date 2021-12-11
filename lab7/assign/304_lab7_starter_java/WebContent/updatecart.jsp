@@ -25,7 +25,7 @@ try{
 	}
 
 	session.setAttribute("productList", productList);
-	//response.sendRedirect("showcart.jsp");
+	response.sendRedirect("showcart.jsp");
 }catch (NumberFormatException ex){
 	response.sendRedirect("showcart.jsp");
 }
