@@ -56,6 +56,10 @@
 				"<tr><th>User id</th><td>"+rst.getString("userid")+"</td></tr>"+
 				"<tr><th>Admin</th><td>"+rst.getString("admin")+"</td></tr>"+
 				"</font></tbody></table>");
+			
+			String editLink = "editcustomer.jsp";
+			out.println("<h3><a style=\"color:#333333\" href=\""+editLink+"\">Edit Account Information</a></h3>");
+
 			String link = "listcustomerorder.jsp?id="+rst.getInt(1);
 			out.println("<h3><a style=\"color:#333333\" href=\""+link+"\">List My Orders</a></h3>");
 		}
