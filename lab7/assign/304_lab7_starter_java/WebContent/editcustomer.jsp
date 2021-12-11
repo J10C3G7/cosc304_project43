@@ -123,7 +123,6 @@
         }
 
 	} catch (SQLException ex) {
-        out.println("second catch:");
 		out.println(ex); 
 	}
 %>
