@@ -13,26 +13,16 @@ if (productList == null)
 // Add new product selected
 // Get product information
 String id = request.getParameter("id");
-String name = request.getParameter("name");
-String price = request.getParameter("price");
-Integer quantity = new Integer(1);
-
-// Store product information in an ArrayList
-ArrayList<Object> product = new ArrayList<Object>();
-product.add(id);
-product.add(name);
-product.add(price);
-product.add(quantity);
 
 // Update quantity if add same item to order again
-if (productList.containsKey(id))
-{	product = (ArrayList<Object>) productList.get(id);
-	int curAmount = ((Integer) product.get(3)).intValue();
-	product.set(3, new Integer(curAmount+1));
+if (productList.containsKey(id)){
+	if(productList.size()==1){
+		session.removeAttribute("productList");
+	}else{
+		productList.remove(id);
+		session.setAttribute("productList", productList);
+	}
 }
-else
-	productList.put(id,product);
-
-session.setAttribute("productList", productList);
+	
 response.sendRedirect("showcart.jsp");
 %>

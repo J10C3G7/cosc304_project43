@@ -16,14 +16,11 @@
 <h3>Enter Review:</h3>
 <br>
 <form method="get" action="addreview.jsp">
+    <%String prodId = request.getParameter("id");
+    out.println("<input type=\"hidden\" name=\"id\" value=\""+prodId+"\">");
+    %>
     <table style="display:inline">
         <tbody>
-            <tr>
-                <td><div align="left"><font face="Arial, Helvetica, sans-serif" size="2">Product Id:</font></div></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="id" size="6" maxlength="6"></td>
-            </tr>
             <tr>
                 <td><div align="left"><font face="Arial, Helvetica, sans-serif" size="2">Review Rating (1-10):</font></div></td>
             </tr>
@@ -58,7 +55,6 @@
     <% String userName = (String) session.getAttribute("authenticatedUser"); %>
 
 <%
-    String prodId = request.getParameter("id");
     String revRat = request.getParameter("reviewRating");
     String rev = request.getParameter("review");
     Locale.setDefault(new Locale("en","CA"));
@@ -130,9 +126,11 @@
                                 out.println("<h3><a style=\"color:#333333\" href=\"product.jsp?id="+prodId+"\">Back to Product Page</a></h3>");
                             }else{
                                 out.println("<h2>Cannot Write More Than One Review</h2>");
+                                out.println("<h3><a style=\"color:#333333\" href=\"product.jsp?id="+prodId+"\">Back to Product Page</a></h3>");
                             }
                         }else{
                             out.println("<h2>Have Not Purchased Product</h2>");
+                            out.println("<h3><a style=\"color:#333333\" href=\"product.jsp?id="+prodId+"\">Back to Product Page</a></h3>");
                         }
 
                     }else{
